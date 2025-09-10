@@ -1,0 +1,10 @@
+.size-card-poster {
+  height: 25rem;
+  object-fit: contain;
+}
+
+.format-text {
+  text-align: justify; 
+  text-indent: 1px;           
+  line-height: 1.6;
+}

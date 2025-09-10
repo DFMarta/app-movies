@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center mt-5">
+  <div class="card shadow p-4" style="max-width: 1000px; width: 100%">
+    <!-- Title & Rate -->
+    <div class="row mb-3">
+      <div class="col-9">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" [(ngModel)]="newMovie.title" name="title" />
+      </div>
+      <div class="col-3">
+        <label class="form-label">Rate</label>
+        <div>
+          @for (star of stars; track star){
+          <i
+            class="bi"
+            [ngClass]="{
+              'bi-star-fill': star <= newMovie.rate,
+              'bi-star': star > newMovie.rate
+            }"
+            (click)="newMovie.rate = star"
+            style="cursor: pointer; font-size: 1.5rem; color: gold"
+          >
+          </i>
+          }
+        </div>
+      </div>
+      <!-- Mood -->
+      <div class="mb-3 col-9" >
+        <label for="mood" class="form-label">Mood</label>
+        <select id="mood" class="form-select" [(ngModel)]="newMovie.mood" name="mood">
+          <option value="" disabled selected>Select a mood</option>
+          <option value="Exciting">😲 Exciting</option>
+          <option value="Funny">😂 Funny</option>
+          <option value="Romantic">😍 Romantic</option>
+          <option value="Scary">😱 Scary</option>
+          <option value="Suspenseful">😳 Suspenseful</option>
+          <option value="Heartwarming">😊 Heartwarming</option>
+          <option value="Dramatic">😭 Dramatic</option>
+          <option value="Mind-blowing">🙃 Mind-blowing</option>
+          <option value="Boring">😑 Boring</option>
+        </select>
+      </div>
+      <!-- Seen & Button -->
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="switchCheckDefault"
+              [(ngModel)]="newMovie.seen"
+              name="seen"
+            />
+            <label class="form-check-label" for="switchCheckDefault">Seen</label>
+          </div>
+        </div>
+        <div class="col text-end">
+          <button type="button" class="btn btn-success" (click)="addMovie()">Add movie</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

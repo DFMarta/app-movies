@@ -1,0 +1,44 @@
+<!-- Movie card container -->
+<div class="card bg-dark text-white mb-5 text-center mx-auto" style="max-width: 800px">
+  <!-- Check if a movie exists -->
+  @if (movie(); as m) {
+  <h2 class="text-center mt-5">{{ m.title }}</h2>
+  <div class="d-flex p-5">
+    <!-- Show poster if available -->
+    @if (m.posterUrl) {
+    <img [src]="m.posterUrl" class="size-card-poster" alt="{{ m.title }}" />
+    }
+    <!-- Movie details -->
+    <div class="d-flex flex-column p-5">
+      <!-- Description -->
+      <p class="format-text"><strong>Description:</strong> {{ m.description }}</p>
+
+      <!-- Duration -->
+      <p><strong>Duration:</strong> {{ m.duration }}</p>
+
+      <!-- Mood -->
+      <p><strong>Mood:</strong> {{ m.mood }}</p>
+
+      <!-- Rate stars -->
+      <p>
+        <strong>Rate: </strong>
+        @for (star of stars; track star; ){
+        <i
+          class="bi"
+          [ngClass]="{
+            'bi-star-fill': star <= m.rate,
+            'bi-star-half': star - 0.5 === m.rate,
+            'bi-star': star > m.rate
+          }"
+          style="color: gold"
+        >
+        </i>
+        }
+      </p>
+    </div>
+  </div>
+  <!-- Loading state while movie data isn't avaible -->
+  } @else {
+  <p class="text-center mt-5 fs-2">Loading...</p>
+  }
+</div>

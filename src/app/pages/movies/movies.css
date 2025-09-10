@@ -1,0 +1,11 @@
+.btn-info{
+    border-color: rgb(32, 161, 235);
+    background-color: rgb(32, 161, 235);
+    color: rgb(255, 255, 255);
+}
+
+.btn-delete{
+    border-color: rgb(245, 70, 58);
+    background-color: rgb(245, 70, 58);
+    color: rgb(255, 255, 255);
+}
