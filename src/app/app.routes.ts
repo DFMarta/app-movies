@@ -6,7 +6,7 @@ import { AddMovie } from './pages/add-movie/add-movie';
 export const routes: Routes = [
     {path: '', component: Movies },
     {path: 'movies', component: Movies },
-    {path: 'movie/:title', component: MoviesDetails },
+    {path: 'movie/:id', component: MoviesDetails },
     {path: 'add', component: AddMovie },
     {path: '**', redirectTo: '', component: Movies },
     

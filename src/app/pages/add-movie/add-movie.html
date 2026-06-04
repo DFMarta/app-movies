@@ -4,27 +4,55 @@
     <div class="row mb-3">
       <div class="col-9">
         <label class="form-label">Title</label>
-        <input type="text" class="form-control" [(ngModel)]="newMovie.title" name="title" />
+
+        <div class="position-relative">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="searchText"
+            (input)="searchMovie()"
+          />
+
+          @if (searchResults.length > 0) {
+            <div class="list-group position-absolute w-100 z-3">
+              @for (movie of searchResults; track movie.id) {
+                <button
+                  type="button"
+                  class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+                  (click)="selectMovie(movie)"
+                >
+                  <img
+                    [src]="'https://image.tmdb.org/t/p/w92' + movie.poster_path"
+                    width="40"
+                    class="rounded"
+                  />
+
+                  <div>{{ movie.title }}</div>
+                </button>
+              }
+            </div>
+          }
+        </div>
       </div>
       <div class="col-3">
         <label class="form-label">Rate</label>
         <div>
-          @for (star of stars; track star){
-          <i
-            class="bi"
-            [ngClass]="{
-              'bi-star-fill': star <= newMovie.rate,
-              'bi-star': star > newMovie.rate
-            }"
-            (click)="newMovie.rate = star"
-            style="cursor: pointer; font-size: 1.5rem; color: gold"
-          >
-          </i>
+          @for (star of stars; track star) {
+            <i
+              class="bi"
+              [ngClass]="{
+                'bi-star-fill': star <= newMovie.rate,
+                'bi-star': star > newMovie.rate,
+              }"
+              (click)="newMovie.rate = star"
+              style="cursor: pointer; font-size: 1.5rem; color: gold"
+            >
+            </i>
           }
         </div>
       </div>
       <!-- Mood -->
-      <div class="mb-3 col-9" >
+      <div class="mb-3 col-9">
         <label for="mood" class="form-label">Mood</label>
         <select id="mood" class="form-select" [(ngModel)]="newMovie.mood" name="mood">
           <option value="" disabled selected>Select a mood</option>

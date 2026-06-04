@@ -2,25 +2,60 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <!-- Container navbar -->
   <div class="container-fluid">
-      <span class="navbar-brand">Catalog</span>
-      <!-- Navigation List -->
+    <span class="navbar-brand">Catalog</span>
+    <!-- Navigation List -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- Movies Section  -->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/movies" (click)="resetSearch()" aria-current="page" href="#">Movies</a>
+          <a
+            class="nav-link"
+            routerLink="/movies"
+            (click)="resetFilters()"
+            aria-current="page"
+            href="#"
+            >Movies</a
+          >
         </li>
         <!-- Add new Section -->
-         <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/add" aria-current="page" href="#">Add new</a>
-        </li>   
+        </li>
       </ul>
-      <!-- Search Form -->
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search"  [ngModel]="searchString()" (ngModelChange)="searchString.set($event)" name="search" aria-label="Search"/>
-      </form>
+
+      <div class="d-flex align-items-center gap-3 ms-auto">
+        <!-- FILTER BUTTONS -->
+        <div class="d-flex gap-2">
+          <button
+            class="btn btn-sm rounded-pill px-3"
+            [ngClass]="isActive('seen') ? 'btn-success' : 'btn-outline-success'"
+            (click)="setFilter('seen')"
+          >
+            ✓ Seen
+          </button>
+
+          <button
+            class="btn btn-sm rounded-pill px-3"
+            [ngClass]="isActive('unseen') ? 'btn-danger' : 'btn-outline-danger'"
+            (click)="setFilter('unseen')"
+          >
+            ✕ Unseen
+          </button>
+        </div>
+
+        <!-- SEARCH -->
+        <form class="d-flex">
+          <input
+            class="form-control form-control-sm"
+            type="search"
+            placeholder="Search"
+            [ngModel]="searchString()"
+            (ngModelChange)="searchString.set($event)"
+            name="search"
+          />
+        </form>
+      </div>
     </div>
   </div>
 </nav>
 <router-outlet></router-outlet>
-

@@ -14,6 +14,9 @@ export class MoviesService {
   //Signal search
   searchString = signal<string>('');
 
+  //Filtro vistas/no vistas
+  viewFilter = signal<'none' | 'seen' | 'unseen'>('none');
+
   //Guarda lista actual de películas localmente
   saveMovies() {
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.movies()));
@@ -31,13 +34,13 @@ export class MoviesService {
   }
 
   //Elimina objeto por índice y actualiza localStorage
-  deleteMovie(index: number) {
-    const movies = this.getMovies();
-    movies.splice(index, 1);
+  deleteMovie(id: string) {
+    const movies = this.getMovies().filter((m) => m.id !== id);
     localStorage.setItem(this.localStorageKey, JSON.stringify(movies));
+    this.movies.set(movies);
   }
 
-  // Actualiza signal del string de search
+  //Actualiza signal del string de search
   setSearch(string: string) {
     this.searchString.set(string);
   }
@@ -45,5 +48,8 @@ export class MoviesService {
   //Limpia campo search
   clearSearch() {
     this.searchString.set('');
+  }
+  setViewFilter(value: 'seen' | 'unseen' | 'none') {
+    this.viewFilter.set(value);
   }
 }

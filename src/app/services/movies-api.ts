@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class MoviesApi {
   // URL base de la API de TMDb y clave de acceso
-  private URL = 'https://api.themoviedb.org/3';
+  private URL = environment.apiUrl;
   private apiKey = environment.apiKey;
 
   constructor(private http: HttpClient) {}

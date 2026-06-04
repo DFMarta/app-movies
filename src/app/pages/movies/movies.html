@@ -1,10 +1,11 @@
 <div>
   <!-- Table -->
-  <table class="table table-dark table-hover">
+  <table class="table table-dark table-hover text-center align-middle">
     <!-- Header -->
     <thead>
       <tr>
         <th>#</th>
+        <th>Image</th>
         <th>Title</th>
         <th>Mood</th>
         <th>Rate</th>
@@ -17,47 +18,57 @@
     <tbody>
       <!-- Row Loop -->
       @for (movie of filteredMovies(); track movie; let i = $index) {
-      <tr>
-        <td>{{ i + 1 }}</td>
-        <td>{{ movie.title }}</td>
-        <td>{{ movie.mood }}</td>
-        <td>
-          <!-- Star rating column -->
-          @for (star of stars(); track star){
-          <i
-            class="bi"
-            [ngClass]="{
-              'bi-star-fill': star <= movie.rate,
-              'bi-star-half': star - 0.5 === movie.rate,
-              'bi-star': star > movie.rate
-            }"
-            style="color: gold"
-          >
-          </i>
-          }
-        </td>
-        <!-- Seen / Unseen status column -->
-        <td>
-          {{ movie.seen ? 'Seen' : 'Pendent' }}
-          @if (movie.seen) {
-          <i class="bi bi-check-circle-fill text-success"></i>
-          } @else {
-          <i class="bi bi-clock-fill text-warning"></i>
-          }
-        </td>
-         <!-- Info button -->
-        <td>
-          <button class="btn btn-sm btn-info" [routerLink]="['/movie', movie.title]">Info</button>
-        </td>
-         <!-- Delete button -->
-        <td>
-          <button class="btn btn-sm btn-delete" (click)="deleteMovie(i)">Delete</button>
-        </td>
-      </tr>
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>
+            @if (movie.posterUrl) {
+              <img
+                [src]="movie.posterUrl"
+                [alt]="movie.title"
+                style="width: 50px; height: 75px; object-fit: cover"
+                class="rounded"
+              />
+            }
+          </td>
+          <td>{{ movie.title }}</td>
+          <td>{{ movie.mood }}</td>
+          <td>
+            <!-- Star rating column -->
+            @for (star of stars(); track star) {
+              <i
+                class="bi"
+                [ngClass]="{
+                  'bi-star-fill': star <= movie.rate,
+                  'bi-star-half': star - 0.5 === movie.rate,
+                  'bi-star': star > movie.rate,
+                }"
+                style="color: gold"
+              >
+              </i>
+            }
+          </td>
+          <!-- Seen / Unseen status column -->
+          <td>
+            {{ movie.seen ? 'Seen' : 'Pending' }}
+            @if (movie.seen) {
+              <i class="bi bi-check-circle-fill text-success"></i>
+            } @else {
+              <i class="bi bi-clock-fill text-warning"></i>
+            }
+          </td>
+          <!-- Info button -->
+          <td>
+            <button class="btn btn-sm btn-info" [routerLink]="['/movie', movie.id]">Info</button>
+          </td>
+          <!-- Delete button -->
+          <td>
+            <button class="btn btn-sm btn-delete" (click)="deleteMovie(movie.id)">Delete</button>
+          </td>
+        </tr>
       } @empty {
-      <tr>
-        <td colspan="7" class="text-center">There aren't movies.</td>
-      </tr>
+        <tr>
+          <td colspan="7" class="text-center">There aren't movies.</td>
+        </tr>
       }
     </tbody>
   </table>

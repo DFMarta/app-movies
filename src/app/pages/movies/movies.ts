@@ -11,9 +11,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './movies.css',
 })
 export class Movies {
-
   //Objeto para almacenar nueva película
   newMovie: Movie = {
+    id: '',
     title: '',
     duration: 0,
     mood: '',
@@ -34,9 +34,15 @@ export class Movies {
   //Procesa las películas según filtro en tiempo real
   filteredMovies = computed(() => {
     const search = this._moviesService.searchString();
-    return search
-      ? this.movies().filter((m) => m.title.toLowerCase().includes(search))
-      : this.movies();
+    const viewFilter = this._moviesService.viewFilter();
+
+    return this.movies().filter((m) => {
+      const matchesSearch = !search || m.title.toLowerCase().includes(search.toLowerCase());
+
+      const matchesView = viewFilter === 'none' ? true : viewFilter === 'seen' ? m.seen : !m.seen;
+
+      return matchesSearch && matchesView;
+    });
   });
 
   //Añade película y actualiza señal
@@ -46,8 +52,8 @@ export class Movies {
   }
 
   //Elimina película y actualiza señal
-  deleteMovie(index: number) {
-    this._moviesService.deleteMovie(index);
+  deleteMovie(id: string) {
+    this._moviesService.deleteMovie(id);
     this.movies.set(this._moviesService.getMovies());
   }
 }
