@@ -71,6 +71,10 @@ export class AddMovie implements OnInit {
     this.searchText = movie.title;
   }
 
+  cancel() {
+    this.router.navigate(['/movies']);
+  }
+
   addMovie() {
     if (!this.newMovie.title || !this.newMovie.rate) {
       alert('Title and rate are required');

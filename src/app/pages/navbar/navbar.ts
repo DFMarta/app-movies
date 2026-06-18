@@ -1,14 +1,14 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
-import { MoviesService } from './services/movies-service';
+import { MoviesService } from '../../services/movies-service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, FormsModule, CommonModule],
-  templateUrl: './app.html',
-  styleUrl: './app.css',
+  templateUrl: './navbar.html',
+  styleUrl: './navbar.css',
 })
 export class App {
   //Título aplicación

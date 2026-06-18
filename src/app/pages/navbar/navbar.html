@@ -3,6 +3,19 @@
   <!-- Container navbar -->
   <div class="container-fluid">
     <span class="navbar-brand">Catalog</span>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
     <!-- Navigation List -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -12,6 +25,8 @@
             class="nav-link"
             routerLink="/movies"
             (click)="resetFilters()"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
             aria-current="page"
             href="#"
             >Movies</a
@@ -19,11 +34,21 @@
         </li>
         <!-- Add new Section -->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/add" aria-current="page" href="#">Add new</a>
+          <a
+            class="nav-link"
+            routerLink="/add"
+            aria-current="page"
+            href="#"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            >Add new</a
+          >
         </li>
       </ul>
 
-      <div class="d-flex align-items-center gap-3 ms-auto">
+      <div
+        class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-3 ms-auto"
+      >
         <!-- FILTER BUTTONS -->
         <div class="d-flex gap-2">
           <button
